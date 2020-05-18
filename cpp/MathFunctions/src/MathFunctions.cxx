@@ -1,10 +1,10 @@
 
-#include "MathFunctions.h"
+#include "tutorial/MathFunctions.h"
 
 #include <cmath>
 
 #ifdef USE_MYMATH
-#  include "mysqrt.h"
+#  include "tutorial/mysqrt.h"
 #endif
 
 namespace mathfunctions {

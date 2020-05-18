@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "MathFunctions.h"
+#include "tutorial/MathFunctions.h"
 
 // include the generated table
 #include "Table.h"
