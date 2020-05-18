@@ -32,13 +32,13 @@ elseif(UNIX)
 endif()
 
 # configure a header file to pass the version number only
-configure_file(TutorialConfig.h.in TutorialConfig.h)
+configure_file(cpp/tutorialbin/TutorialConfig.h.in TutorialConfig.h)
 
 # add the MathFunctions library
-add_subdirectory(MathFunctions)
+add_subdirectory(cpp/MathFunctions)
 
 # add the executable
-add_executable(Tutorial tutorial.cxx)
+add_executable(Tutorial cpp/tutorialbin/tutorial.cxx)
 set_target_properties(Tutorial PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
 target_link_libraries(Tutorial PUBLIC MathFunctions)
