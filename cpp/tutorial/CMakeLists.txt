@@ -1,9 +1,9 @@
 # add the library that runs
-add_library(MathFunctions src/MathFunctions.cxx)
+add_library(tutorial src/MathFunctions.cxx)
 
 # state that anybody linking to us needs to include the current source dir
 # to find MathFunctions.h, while we don't.
-target_include_directories(MathFunctions
+target_include_directories(tutorial
                            INTERFACE
                             $<BUILD_INTERFACE:include>
                             $<INSTALL_INTERFACE:include>
@@ -13,7 +13,7 @@ target_include_directories(MathFunctions
 option(USE_MYMATH "Use tutorial provided math implementation" ON)
 if(USE_MYMATH)
 
-  target_compile_definitions(MathFunctions PRIVATE "USE_MYMATH")
+  target_compile_definitions(tutorial PRIVATE "USE_MYMATH")
 
   # first we add the executable that generates the table
   add_executable(MakeTable src/MakeTable.cxx)
@@ -43,21 +43,21 @@ if(USE_MYMATH)
                         )
 
   target_link_libraries(SqrtLibrary PUBLIC tutorial_compiler_flags)
-  target_link_libraries(MathFunctions PRIVATE SqrtLibrary)
+  target_link_libraries(tutorial PRIVATE SqrtLibrary)
 endif()
 
-target_link_libraries(MathFunctions PUBLIC tutorial_compiler_flags)
+target_link_libraries(tutorial PUBLIC tutorial_compiler_flags)
 
 # define the symbol stating we are using the declspec(dllexport) when
 # building on windows
-target_compile_definitions(MathFunctions PRIVATE "EXPORTING_MYMATH")
+target_compile_definitions(tutorial PRIVATE "EXPORTING_MYMATH")
 
 # setup the version numbering
-set_property(TARGET MathFunctions PROPERTY VERSION "1.0.0")
-set_property(TARGET MathFunctions PROPERTY SOVERSION "1")
+set_property(TARGET tutorial PROPERTY VERSION "1.0.0")
+set_property(TARGET tutorial PROPERTY SOVERSION "1")
 
 # install rules
-install(TARGETS MathFunctions tutorial_compiler_flags
+install(TARGETS tutorial tutorial_compiler_flags
         DESTINATION lib
         EXPORT MathFunctionsTargets)
 install(FILES MathFunctions.h DESTINATION include)
