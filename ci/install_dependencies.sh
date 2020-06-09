@@ -10,6 +10,7 @@ then
     exit 1
 fi
 
+sudo apt-get update
 sudo apt-get install build-essential python3-pip
 sudo -H pip3 install -U pip
 hash -r
