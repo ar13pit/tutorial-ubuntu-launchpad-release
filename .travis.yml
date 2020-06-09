@@ -1,0 +1,13 @@
+os: linux
+dist: bionic
+language: shell
+
+jobs:
+  include:
+    - stage: Build, Test and Release
+      language: generic
+      name: build-test-release
+      install: ci/install_dependencies.sh
+      before_script: ci/build_package.sh
+      script: ci/test_package.sh
+      after_script: ci/release_package.sh
