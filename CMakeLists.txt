@@ -35,13 +35,13 @@ endif()
 configure_file(cpp/tutorialbin/TutorialConfig.h.in TutorialConfig.h)
 
 # add the MathFunctions library
-add_subdirectory(cpp/MathFunctions)
+add_subdirectory(cpp/tutorial)
 
 # add the executable
 add_executable(Tutorial cpp/tutorialbin/tutorial.cxx)
 set_target_properties(Tutorial PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
-target_link_libraries(Tutorial PUBLIC MathFunctions)
+target_link_libraries(Tutorial PUBLIC tutorial)
 
 # add the binary tree to the search path for include files
 # so that we will find TutorialConfig.h
@@ -114,7 +114,7 @@ write_basic_package_version_file(
 # install the configuration file
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/MathFunctionsConfig.cmake
-  DESTINATION lib/cmake/MathFunctions
+  DESTINATION lib/cmake/tutorial
   )
 
 # generate the export targets for the build tree
