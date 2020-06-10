@@ -9,3 +9,6 @@ then
     echo -e "\e[35m\e[1m Error!\e[0m Trying to execute a CI script in a non-CI environment. Exiting script."
     exit 1
 fi
+
+cd build
+ctest -W
