@@ -4,8 +4,8 @@ add_library(tutorial src/MathFunctions.cxx)
 # state that anybody linking to us needs to include the current source dir
 # to find MathFunctions.h, while we don't.
 target_include_directories(tutorial
-                           INTERFACE
-                            $<BUILD_INTERFACE:include>
+                           PUBLIC
+                           $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
                             $<INSTALL_INTERFACE:include>
                            )
 
@@ -35,6 +35,7 @@ if(USE_MYMATH)
   # state that we depend on our binary dir to find Table.h
   target_include_directories(SqrtLibrary PRIVATE
                              ${CMAKE_CURRENT_BINARY_DIR}
+                             include
                              )
 
   # state that SqrtLibrary need PIC when the default is shared libraries
