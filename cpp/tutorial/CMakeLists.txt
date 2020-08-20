@@ -6,11 +6,12 @@ add_library(tutorial src/MathFunctions.cxx)
 target_include_directories(tutorial
                            PUBLIC
                            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-                            $<INSTALL_INTERFACE:include>
+                           $<INSTALL_INTERFACE:include>
                            )
 
 # should we use our own math functions
 option(USE_MYMATH "Use tutorial provided math implementation" ON)
+message("-- Option USE_MYMATH is ${USE_MYMATH}")
 if(USE_MYMATH)
 
   target_compile_definitions(tutorial PRIVATE "USE_MYMATH")
