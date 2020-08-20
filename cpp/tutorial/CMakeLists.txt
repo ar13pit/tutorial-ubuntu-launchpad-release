@@ -62,4 +62,6 @@ set_property(TARGET tutorial PROPERTY SOVERSION "1")
 install(TARGETS tutorial tutorial_compiler_flags
         DESTINATION lib
         EXPORT MathFunctionsTargets)
-install(FILES MathFunctions.h DESTINATION include)
+
+install(DIRECTORY include/tutorial
+        DESTINATION include)
