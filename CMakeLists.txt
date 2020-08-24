@@ -31,29 +31,12 @@ elseif(UNIX)
   set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib")
 endif()
 
-# configure a header file to pass the version number only
-configure_file(cpp/tutorialbin/TutorialConfig.h.in TutorialConfig.h)
 
 # add the MathFunctions library
 add_subdirectory(cpp/tutorial)
 
-# add the executable
-add_executable(Tutorial cpp/tutorialbin/tutorial.cxx)
-set_target_properties(Tutorial PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+add_subdirectory(cpp/tutorialbin)
 
-target_link_libraries(Tutorial PUBLIC tutorial)
-
-# add the binary tree to the search path for include files
-# so that we will find TutorialConfig.h
-target_include_directories(Tutorial PUBLIC
-                           "${PROJECT_BINARY_DIR}"
-                           )
-
-# add the install targets
-install(TARGETS Tutorial DESTINATION bin)
-install(FILES "${PROJECT_BINARY_DIR}/TutorialConfig.h"
-  DESTINATION include
-  )
 
 # enable testing
 enable_testing()
