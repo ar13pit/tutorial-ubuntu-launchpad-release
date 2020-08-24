@@ -1,11 +1,11 @@
 # add the library that runs
-add_library(tutorial src/MathFunctions.cxx)
+add_library(tutorial MathFunctions.cxx)
 
 # state that anybody linking to us needs to include the current source dir
 # to find MathFunctions.h, while we don't.
 target_include_directories(tutorial
                            PUBLIC
-                           $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+                           $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
                            $<INSTALL_INTERFACE:include>
                            )
 
@@ -17,7 +17,7 @@ if(USE_MYMATH)
   target_compile_definitions(tutorial PRIVATE "USE_MYMATH")
 
   # first we add the executable that generates the table
-  add_executable(MakeTable src/MakeTable.cxx)
+  add_executable(MakeTable MakeTable.cxx)
   target_link_libraries(MakeTable PRIVATE tutorial_compiler_flags)
 
   # add the command to generate the source code
@@ -29,14 +29,14 @@ if(USE_MYMATH)
 
   # library that just does sqrt
   add_library(SqrtLibrary STATIC
-              src/mysqrt.cxx
+              mysqrt.cxx
               ${CMAKE_CURRENT_BINARY_DIR}/Table.h
               )
 
   # state that we depend on our binary dir to find Table.h
   target_include_directories(SqrtLibrary PRIVATE
                              ${CMAKE_CURRENT_BINARY_DIR}
-                             include
+                             ${CMAKE_CURRENT_SOURCE_DIR}/..
                              )
 
   # state that SqrtLibrary need PIC when the default is shared libraries
@@ -60,8 +60,10 @@ set_property(TARGET tutorial PROPERTY SOVERSION "1")
 
 # install rules
 install(TARGETS tutorial tutorial_compiler_flags
-        DESTINATION lib
-        EXPORT MathFunctionsTargets)
+        EXPORT MathFunctionsTargets
+        DESTINATION lib)
 
-install(DIRECTORY include/tutorial
-        DESTINATION include)
+# install(DIRECTORY include/tutorial
+        # DESTINATION include)
+
+install(FILES MathFunctions.h mysqrt.h DESTINATION include/tutorial)
