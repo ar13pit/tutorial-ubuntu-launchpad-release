@@ -10,12 +10,11 @@ target_link_libraries(Tutorial PUBLIC tutorial)
 # add the binary tree to the search path for include files
 # so that we will find TutorialConfig.h
 target_include_directories(Tutorial PUBLIC
-                           # "${PROJECT_BINARY_DIR}"
                            ${CMAKE_CURRENT_BINARY_DIR}
                            )
 
 # add the install targets
-install(TARGETS Tutorial DESTINATION bin)
+install(TARGETS Tutorial DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/TutorialConfig.h"
-  DESTINATION include/tutorial
-  )
+  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tutorial
+)

@@ -61,9 +61,9 @@ set_property(TARGET tutorial PROPERTY SOVERSION "1")
 # install rules
 install(TARGETS tutorial tutorial_compiler_flags
         EXPORT MathFunctionsTargets
-        DESTINATION lib)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 # install(DIRECTORY include/tutorial
         # DESTINATION include)
 
-install(FILES MathFunctions.h mysqrt.h DESTINATION include/tutorial)
+install(FILES MathFunctions.h mysqrt.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tutorial)
