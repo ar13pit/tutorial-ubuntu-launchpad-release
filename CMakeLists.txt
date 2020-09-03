@@ -25,6 +25,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 
+include(GNUInstallDirs)
+
 if(APPLE)
   set(CMAKE_INSTALL_RPATH "@executable_path/../lib")
 elseif(UNIX)
